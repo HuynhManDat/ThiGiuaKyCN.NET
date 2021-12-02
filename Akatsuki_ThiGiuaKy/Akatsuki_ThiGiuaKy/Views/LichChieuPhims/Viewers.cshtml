@@ -1,0 +1,55 @@
+﻿@model IEnumerable<Akatsuki_ThiGiuaKy.Entities.DatVe>
+
+@{
+    ViewData["Title"] = "Danh sách người xem";
+}
+
+<h1>Danh sách người xem @ViewBag.Rap.TenRap</h1>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.SoDienThoai)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.LichChieuPhim.Rap.TenRap)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.LichChieuPhim.Phim.TenPhim)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.LichChieuPhim.ThoiGianChieu)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ThoiGianDat)
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.SoDienThoai)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.LichChieuPhim.Rap.TenRap)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.LichChieuPhim.Phim.TenPhim)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.LichChieuPhim.ThoiGianChieu)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ThoiGianDat)
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<div>
+    <a asp-action="Index">Trở về</a>
+</div>
