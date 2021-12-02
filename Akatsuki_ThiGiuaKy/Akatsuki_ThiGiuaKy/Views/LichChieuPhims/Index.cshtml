@@ -1,13 +1,13 @@
 ﻿@model IEnumerable<Akatsuki_ThiGiuaKy.Entities.LichChieuPhim>
 
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Danh sách lịch chiếu";
 }
 
 <h1>Danh sách lịch chiếu phim</h1>
 
 <p>
-    <a asp-action="Create">Create New</a>
+    <a asp-action="Create">Tạo mới</a>
 </p>
 <table class="table">
     <thead>
@@ -25,24 +25,25 @@
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Rap.MaRap)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Phim.TenPhim)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.ThoiGianChieu)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.MaLichChieuPhim">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.MaLichChieuPhim">Details</a> |
-                <a asp-action="Viewers" asp-route-id="@item.MaLichChieuPhim">Danh sách xem phim</a> |
-                <a asp-action="Delete" asp-route-id="@item.MaLichChieuPhim">Delete</a>
-            </td>
-        </tr>
-}
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Rap.TenRap)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Phim.TenPhim)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ThoiGianChieu)
+                </td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@item.MaLichChieuPhim">Cập nhật</a> |
+                    <a asp-action="Details" asp-route-id="@item.MaLichChieuPhim">Chi tiết</a> |
+                    <a asp-action="Viewers" asp-route-id="@item.MaLichChieuPhim">Danh sách xem phim</a> |
+                    <a asp-action="Delete" asp-route-id="@item.MaLichChieuPhim">Xóa</a>
+                </td>
+            </tr>
+        }
     </tbody>
 </table>

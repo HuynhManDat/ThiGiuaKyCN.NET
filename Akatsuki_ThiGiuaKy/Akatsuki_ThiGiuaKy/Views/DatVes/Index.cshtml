@@ -6,9 +6,19 @@
 
 <h1>Danh sách đặt vé</h1>
 
-<p>
-    <a asp-action="DatVe">Create New</a>
-</p>
+<div class="btn-group">
+
+    <a href="@Url.Action("DatVe", "Home")">
+        <button type="button" class="btn btn-default">
+            Create New
+        </button>
+    </a>
+</div>
+@using (Html.BeginForm("Index", "DatVes", FormMethod.Get))
+{
+    <input type="text" name="searchString" />
+    <button type="submit">Find</button>
+}
 <table class="table">
     <thead>
         <tr>
@@ -28,26 +38,27 @@
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.SoDienThoai)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.SoLuong)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.LichChieuPhim.MaLichChieuPhim)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.ThoiGianDat)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.MaDatVe">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.MaDatVe">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.MaDatVe">Delete</a>
-            </td>
-        </tr>
-}
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.SoDienThoai)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.SoLuong)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.LichChieuPhim.MaLichChieuPhim)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ThoiGianDat)
+                </td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@item.MaDatVe">Edit</a> |
+                    <a asp-action="Details" asp-route-id="@item.MaDatVe">Details</a> |
+                    <a asp-action="Delete" asp-route-id="@item.MaDatVe">Delete</a>
+                </td>
+            </tr>
+        }
     </tbody>
 </table>

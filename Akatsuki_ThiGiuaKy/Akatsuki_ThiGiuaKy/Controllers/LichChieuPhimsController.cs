@@ -7,7 +7,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Akatsuki_ThiGiuaKy.Entities;
 
-namespace Akatsuki_ThiGiuaKy.Controllers
+namespace HC_QLDatVeXemPhim.Controllers
 {
     public class LichChieuPhimsController : Controller
     {

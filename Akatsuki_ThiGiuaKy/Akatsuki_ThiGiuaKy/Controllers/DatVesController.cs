@@ -19,20 +19,16 @@ namespace Akatsuki_ThiGiuaKy.Controllers
         }
 
         // GET: DatVes
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(string searchString)
         {
+            //var searchDS = (from c in _context.DatVes
+            //                    select c).ToList();
+            //if (!string.IsNullOrEmpty(searchString))
+            //{
+            //    searchDS = searchDS.Where(s => s.MaLichChieuPhim.Contains(searchString)).ToList();
+            //}
             var myDbContext = _context.DatVes.Include(d => d.LichChieuPhim);
-            return View(await myDbContext.ToListAsync());
-            ViewData["phims"] = await _context.Phims.ToListAsync();
-
-            ViewData["raps"] = await _context.Raps.ToListAsync();
-
-            ViewData["lichchieus"] = await _context.LichChieuPhims
-                .Include(l => l.Phim)
-                .Include(l => l.Rap)
-                .ToListAsync();
-
-            return View();
+            return View(await myDbContext.ToListAsync());           
         }
 
         // GET: DatVes/Details/5
@@ -164,69 +160,6 @@ namespace Akatsuki_ThiGiuaKy.Controllers
         private bool DatVeExists(int id)
         {
             return _context.DatVes.Any(e => e.MaDatVe == id);
-        }
-
-        public async Task<IActionResult> DatVe()
-        {
-            var lichchieus = await _context.LichChieuPhims
-                .Include(l => l.Phim)
-                .Include(l => l.Rap)
-                .Where(l => l.ThoiGianChieu.CompareTo(DateTime.Now) > 0)
-                .ToListAsync();
-
-            ViewData["LichChieu"] = lichchieus.Select(l => new SelectListItem
-            {
-                Value = l.MaLichChieuPhim.ToString(),
-                Text = l.Rap.TenRap + " - " + l.Phim.TenPhim + " - " + l.ThoiGianChieu
-            });
-
-            return View();
-        }
-
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DatVe([Bind("SoDienThoai,MaLichChieuPhim,SoLuong")] DatVe datVe)
-        {
-            var lichchieus = await _context.LichChieuPhims
-                .Include(l => l.Phim)
-                .Include(l => l.Rap)
-                .Where(l => l.ThoiGianChieu.CompareTo(DateTime.Now) > 0)
-                .ToListAsync();
-
-            ViewData["LichChieu"] = lichchieus.Select(l => new SelectListItem
-            {
-                Value = l.MaLichChieuPhim.ToString(),
-                Text = l.Rap.TenRap + " - " + l.Phim.TenPhim + " - " + l.ThoiGianChieu
-            });
-
-            if (ModelState.IsValid)
-            {
-                var lichchieu = lichchieus
-                    .FirstOrDefault(lichchieu => lichchieu.MaLichChieuPhim == datVe.MaLichChieuPhim);
-
-                var rap = await _context.Raps.FirstOrDefaultAsync(rap => rap.MaRap == lichchieu.MaRap);
-
-                var soluongdadat = await _context.DatVes
-                    .Where(d => d.MaLichChieuPhim == datVe.MaLichChieuPhim)
-                    .GroupBy(d => d.MaLichChieuPhim)
-                    .Select(d => new { SoLuong = d.Sum(d => d.SoLuong) })
-                    .FirstOrDefaultAsync();
-                if (soluongdadat == null)
-                {
-                    _context.Add(datVe);
-                    await _context.SaveChangesAsync();
-                    return RedirectToAction(nameof(DatVe));
-                }
-                if ((rap.SoChoTrong - soluongdadat.SoLuong) < datVe.SoLuong)
-                {
-                    ViewBag.Message = "Số lượng vé có thể đặt tối đa là " + (rap.SoChoTrong - soluongdadat.SoLuong).ToString();
-                    return View(datVe);
-                }
-
-
-            }
-
-            return View(datVe);
-        }
+        }             
     }
 }
