@@ -92,8 +92,9 @@ namespace Akatsuki_ThiGiuaKy.Controllers
                     ViewBag.Message = "Số lượng vé có thể đặt tối đa là " + (rap.SoChoTrong - soluongdadat.SoLuong).ToString();
                     return View(datVe);
                 }
-
-
+                _context.Add(datVe);
+                await _context.SaveChangesAsync();
+                return RedirectToAction(nameof(DatVe));
             }
 
             return View(datVe);
