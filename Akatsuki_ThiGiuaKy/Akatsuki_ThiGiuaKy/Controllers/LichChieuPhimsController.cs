@@ -9,23 +9,23 @@ using Akatsuki_ThiGiuaKy.Entities;
 
 namespace Akatsuki_ThiGiuaKy.Controllers
 {
-    public class LichChieuPhimController : Controller
+    public class LichChieuPhimsController : Controller
     {
         private readonly MyDbContext _context;
 
-        public LichChieuPhimController(MyDbContext context)
+        public LichChieuPhimsController(MyDbContext context)
         {
             _context = context;
         }
 
-        // GET: LichChieuPhim
+        // GET: LichChieuPhims
         public async Task<IActionResult> Index()
         {
-            var datVeContext = _context.LichChieuPhims.Include(l => l.Phim).Include(l => l.Rap);
-            return View(await datVeContext.ToListAsync());
+            var myDbContext = _context.LichChieuPhims.Include(l => l.Phim).Include(l => l.Rap);
+            return View(await myDbContext.ToListAsync());
         }
 
-        // GET: LichChieuPhim/Details/5
+        // GET: LichChieuPhims/Details/5
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
@@ -70,17 +70,17 @@ namespace Akatsuki_ThiGiuaKy.Controllers
             return View(danhSachNguoiXem);
         }
 
-        // GET: LichChieuPhim/Create
+        // GET: LichChieuPhims/Create
         public IActionResult Create()
         {
             ViewData["MaPhim"] = new SelectList(_context.Phims, "MaPhim", "TenPhim");
-            ViewData["MaRap"] = new SelectList(_context.Raps, "MaRap", "TenRap");
+            ViewData["MaRap"] = new SelectList(_context.Raps, "MaRap", "MaRap");
             return View();
         }
 
-        // POST: LichChieuPhim/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for 
-        // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+        // POST: LichChieuPhims/Create
+        // To protect from overposting attacks, enable the specific properties you want to bind to.
+        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("MaLichChieuPhim,MaRap,MaPhim,ThoiGianChieu")] LichChieuPhim lichChieuPhim)
@@ -92,11 +92,11 @@ namespace Akatsuki_ThiGiuaKy.Controllers
                 return RedirectToAction(nameof(Index));
             }
             ViewData["MaPhim"] = new SelectList(_context.Phims, "MaPhim", "TenPhim", lichChieuPhim.MaPhim);
-            ViewData["MaRap"] = new SelectList(_context.Raps, "MaRap", "TenRap", lichChieuPhim.MaRap);
+            ViewData["MaRap"] = new SelectList(_context.Raps, "MaRap", "MaRap", lichChieuPhim.MaRap);
             return View(lichChieuPhim);
         }
 
-        // GET: LichChieuPhim/Edit/5
+        // GET: LichChieuPhims/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -110,13 +110,13 @@ namespace Akatsuki_ThiGiuaKy.Controllers
                 return NotFound();
             }
             ViewData["MaPhim"] = new SelectList(_context.Phims, "MaPhim", "TenPhim", lichChieuPhim.MaPhim);
-            ViewData["MaRap"] = new SelectList(_context.Raps, "MaRap", "TenRap", lichChieuPhim.MaRap);
+            ViewData["MaRap"] = new SelectList(_context.Raps, "MaRap", "MaRap", lichChieuPhim.MaRap);
             return View(lichChieuPhim);
         }
 
-        // POST: LichChieuPhim/Edit/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for 
-        // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+        // POST: LichChieuPhims/Edit/5
+        // To protect from overposting attacks, enable the specific properties you want to bind to.
+        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, [Bind("MaLichChieuPhim,MaRap,MaPhim,ThoiGianChieu")] LichChieuPhim lichChieuPhim)
@@ -147,11 +147,11 @@ namespace Akatsuki_ThiGiuaKy.Controllers
                 return RedirectToAction(nameof(Index));
             }
             ViewData["MaPhim"] = new SelectList(_context.Phims, "MaPhim", "TenPhim", lichChieuPhim.MaPhim);
-            ViewData["MaRap"] = new SelectList(_context.Raps, "MaRap", "TenRap", lichChieuPhim.MaRap);
+            ViewData["MaRap"] = new SelectList(_context.Raps, "MaRap", "MaRap", lichChieuPhim.MaRap);
             return View(lichChieuPhim);
         }
 
-        // GET: LichChieuPhim/Delete/5
+        // GET: LichChieuPhims/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -171,7 +171,7 @@ namespace Akatsuki_ThiGiuaKy.Controllers
             return View(lichChieuPhim);
         }
 
-        // POST: LichChieuPhim/Delete/5
+        // POST: LichChieuPhims/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)

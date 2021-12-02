@@ -1,5 +1,48 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
+﻿@model IEnumerable<Akatsuki_ThiGiuaKy.Entities.LichChieuPhim>
+
 @{
+    ViewData["Title"] = "Index";
 }
+
+<h1>Danh sách lịch chiếu phim</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Rap)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Phim)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ThoiGianChieu)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Rap.MaRap)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Phim.TenPhim)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ThoiGianChieu)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.MaLichChieuPhim">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.MaLichChieuPhim">Details</a> |
+                <a asp-action="Viewers" asp-route-id="@item.MaLichChieuPhim">Danh sách xem phim</a> |
+                <a asp-action="Delete" asp-route-id="@item.MaLichChieuPhim">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
