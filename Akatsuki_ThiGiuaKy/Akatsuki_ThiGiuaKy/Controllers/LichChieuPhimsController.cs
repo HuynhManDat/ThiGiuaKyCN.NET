@@ -7,13 +7,13 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Akatsuki_ThiGiuaKy.Entities;
 
-namespace Akatsuki_ThiGiuaKy.Controllers
+namespace HC_QLDatVeXemPhim.Controllers
 {
-    public class LichChieuPhimController : Controller
+    public class LichChieuPhimsController : Controller
     {
         private readonly MyDbContext _context;
 
-        public LichChieuPhimController(MyDbContext context)
+        public LichChieuPhimsController(MyDbContext context)
         {
             _context = context;
         }
