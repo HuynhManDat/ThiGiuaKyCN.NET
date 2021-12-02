@@ -5,16 +5,15 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
-using Akatsuki_ThiGiuaKy.Core;
 using Akatsuki_ThiGiuaKy.Entities;
 
 namespace Akatsuki_ThiGiuaKy.Controllers
 {
     public class LichChieuPhimController : Controller
     {
-        private readonly DatVeContext _context;
+        private readonly MyDbContext _context;
 
-        public LichChieuPhimController(DatVeContext context)
+        public LichChieuPhimController(MyDbContext context)
         {
             _context = context;
         }
